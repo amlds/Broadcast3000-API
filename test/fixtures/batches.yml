@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: 1
+  school: one
+  course: one
+  start_at: 2023-02-21
+  end_at: 2023-02-21
+
+two:
+  number: 1
+  school: two
+  course: two
+  start_at: 2023-02-21
+  end_at: 2023-02-21

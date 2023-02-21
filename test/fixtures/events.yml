@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  start_time: 2023-02-21 10:27:09
+  end_time: 2023-02-21 10:27:09
+  description: MyText
+  event_type: one
+  school: one
+
+two:
+  name: MyString
+  start_time: 2023-02-21 10:27:09
+  end_time: 2023-02-21 10:27:09
+  description: MyText
+  event_type: two
+  school: two
