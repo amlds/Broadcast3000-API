@@ -17,6 +17,9 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
+  # Enable config hosts for development
+  Rails.application.config.hosts << 'localhost.3001'
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
