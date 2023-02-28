@@ -2,28 +2,41 @@ class Api::V1::EventsController < ApplicationController
   before_action :set_event, only: %i[show update destroy]
 
   def index
-    school = School.find(params[:school_id])
-    events = school.events
-    render json: events
+    @school = School.find(params[:school_id])
+    @events = @school.events
+    render json: @events
   end
 
   def show
-    @event = Event.find(params[:id])
+    @school = School.find(params[:school_id])
+    @event = @school.events.find(params[:id])
+    render json: @event
   end
 
   def update
-    @event.update(event_params)
+    @event = Event.find(params[:id])
+    if @event.update(event_params)
+      render json: @event, status: :ok
+    else
+      render json: @event.errors, status: :unprocessable_entity
+    end
   end
 
   def create
-    @event = Event.new(event_params)
-    @event.school = School.find(params[school_id])
-
-    @event.save
+    @school = School.find(params[:school_id])
+    @event = @school.events.build(event_params)
+    @event.event_type = EventType.find_by(id: params[:event][:event_type_id])
+    if @event.save
+      render json: @event, status: :created
+    else
+      render json: @event.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
+    @event = Event.find(params[:id])
     @event.destroy
+    head :no_content
   end
 
   private
