@@ -14,8 +14,9 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def update
+    @event = Event.find(params[:id])
     if @event.update(event_params)
-      render json: @event
+      render json: @event, status: :ok
     else
       render json: @event.errors, status: :unprocessable_entity
     end
@@ -25,7 +26,6 @@ class Api::V1::EventsController < ApplicationController
     @school = School.find(params[:school_id])
     @event = @school.events.build(event_params)
     @event.event_type = EventType.find_by(id: params[:event][:event_type_id])
-
     if @event.save
       render json: @event, status: :created
     else
@@ -34,6 +34,9 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    head :no_content
   end
 
   private
