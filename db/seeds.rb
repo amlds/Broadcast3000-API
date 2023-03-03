@@ -32,16 +32,9 @@ p 'Create Manager'
 Manager.create!(user: user, school: wagon_lyon)
 
 p 'Create event type'
-private_event = EventType.create!(name: 'Private', color: '#dcdcdc')
-
-p 'Create Event'
-Event.create!(
-  name: 'Test 1',
-  description: 'Lorem Ipsum',
-  event_type: private_event,
-  school: wagon_lyon,
-  start_time: Time.now,
-  end_time: Time.now
-)
+EventType.create!(name: 'Private', color: '#156E69')
+EventType.create!(name: 'Public', color: '#33156E')
+EventType.create!(name: 'Formation', color: '#960A03')
+EventType.create!(name: 'Extern', color: '#AB5D0E')
 
 p 'Finish seed !'
