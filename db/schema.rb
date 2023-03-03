@@ -55,8 +55,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_21_093207) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
-    t.time "start_time"
-    t.time "end_time"
+    t.string "start_time"
+    t.string "end_time"
     t.text "description"
     t.bigint "event_type_id", null: false
     t.bigint "school_id", null: false
