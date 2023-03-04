@@ -13,6 +13,15 @@ class Api::V1::BatchsController < ApplicationController
     render json: @batch
   end
 
+  def create
+    @batch = School.find(params[:school_id])
+    if @batch.save
+      render json: @batch, status: :created
+    else
+      render json: @batch.errors, status: :unprocessable_entity
+    end
+  end
+
   def update
     @batch = Batch.find(params[:id])
     if @batch.update(batch_params)
@@ -22,15 +31,6 @@ class Api::V1::BatchsController < ApplicationController
     end
   end
 
-  def create
-    @school = School.find(params[:school_id])
-    @batch = @school.batchs.build(batch_params)
-    if @batch.save
-      render json: @batch, status: :created
-    else
-      render json: @batch.errors, status: :unprocessable_entity
-    end
-  end
 
   def destroy
     @batch = Batch.find(params[:id])
@@ -45,6 +45,6 @@ class Api::V1::BatchsController < ApplicationController
   end
 
   def batch_params
-    params.require(:batch).permit(:name, :start_time, :end_time, :description)
+    params.require(:batch).permit(:name, :start_time)
   end
 end

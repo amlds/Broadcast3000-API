@@ -24,6 +24,8 @@ class Api::V1::EventsController < ApplicationController
 
   def create
     @school = School.find(params[:school_id])
+    p @school
+    ap @school
     @event = @school.events.build(event_params)
     @event.event_type = EventType.find_by(id: params[:event][:event_type_id])
     if @event.save

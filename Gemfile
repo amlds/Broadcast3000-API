@@ -49,3 +49,6 @@ end
 gem 'devise', '~> 4.9'
 
 gem "jsonapi-serializer", "~> 2.2"
+
+# awesome_print is a pretty printer for Ruby objects
+gem 'awesome_print', '~> 1.8'
