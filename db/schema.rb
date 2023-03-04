@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_21_093207) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_04_095117) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,8 +18,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_21_093207) do
     t.integer "number"
     t.bigint "school_id", null: false
     t.bigint "course_id", null: false
-    t.date "start_at"
-    t.date "end_at"
+    t.string "start_at"
+    t.string "end_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_batches_on_course_id"
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_21_093207) do
     t.bigint "course_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "programming_language"
     t.index ["course_id"], name: "index_challenges_on_course_id"
   end
 
@@ -41,7 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_21_093207) do
   end
 
   create_table "courses", force: :cascade do |t|
-    t.string "type"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
