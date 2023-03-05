@@ -49,6 +49,6 @@ class Api::V1::BatchsController < ApplicationController
   end
 
   def batch_params
-    params.require(:batch).permit(:number, :start_at, :end_at, :course_id, :school_id)
+    params.require(:batch).permit(:number, :start_at, :end_at, :school_id, :course_id)
   end
 end
