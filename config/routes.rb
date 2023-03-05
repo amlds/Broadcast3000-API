@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         resources :events, only: %i[index show update create destroy]
         resources :batchs, only: %i[index show update create destroy]
       end
+      ressources :course, only: %i[index show]
     end
   end
 end
