@@ -10,7 +10,7 @@ Rails.application.routes.draw do
         resources :challenges, only: %i[index show]
       end
       resources :event_types, only: %i[index show update create destroy]
-      resources :schools, only: %i[show] do
+      resources :schools, only: %i[index show] do
         resources :events, only: %i[index show update create destroy]
         resources :batchs, only: %i[index show update create destroy]
       end
