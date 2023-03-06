@@ -9,6 +9,7 @@ class Api::V1::EventTypesController < ApplicationController
 
   # GET /api/v1/event_types/1
   def show
+    @event_types = EventType.find(params[:id])
     render json: @event_type
   end
 
