@@ -40,6 +40,7 @@ EventType.create!(name: 'Extern', color: '#AB5D0E')
 p 'Create courses'
 Course.create(name: 'Web Development')
 Course.create(name: 'Data Science')
+Course.create(name: 'Data Analytics')
 
 p'Create Challenge web'
 Challenge.create!(name: 'Setup', programming_language: 'Software', course: Course.first)
@@ -72,6 +73,5 @@ Challenge.create!(name: 'Search', programming_language: 'Ruby on Rails', course:
 Challenge.create!(name: 'AJAX in Rails', programming_language: 'Ruby on Rails', course: Course.first)
 Challenge.create!(name: 'WebSocket & Action Cable', programming_language: 'Ruby on Rails', course: Course.first)
 Challenge.create!(name: 'Background Jobs & Sidekiq', programming_language: 'Ruby on Rails', course: Course.first)
-
 
 p 'Finish seed !'
