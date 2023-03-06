@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   # root "articles#index"
   namespace :api do
     namespace :v1 do
-      resources :courses, only: %i[index show]
+      resources :courses, only: %i[index show] do
+        resources :challenges, only: %i[index show]
+      end
       resources :event_types, only: %i[index show update create destroy]
       resources :schools, only: %i[show] do
         resources :events, only: %i[index show update create destroy]
