@@ -18,14 +18,14 @@ Rails.application.configure do
   config.server_timing = true
 
   # Enable config hosts for development
-  Rails.application.config.hosts << 'localhost.3001'
+  Rails.application.config.hosts << "localhost.3001"
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      "Cache-Control" => "public, max-age=#{2.days.to_i}"
+      "Cache-Control" => "public, max-age=#{2.days.to_i}",
     }
   else
     config.action_controller.perform_caching = false
@@ -57,8 +57,7 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
 
   # Default url options for the Devise mailer.
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
-
+  config.action_mailer.default_url_options = { host: "localhost", port: 3001 }
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
