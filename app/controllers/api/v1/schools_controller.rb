@@ -1,4 +1,6 @@
 class Api::V1::SchoolsController < ApplicationController
+  before_action :authenticate_api_v1_user!, only: %i[index]
+
   def index
     @schools = School.all
     render json: @schools
