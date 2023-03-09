@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      post "auth/login", to: "authentications#login"
+
       resources :users
       resources :courses, only: %i[index show] do
         resources :challenges, only: %i[index show]

@@ -48,3 +48,5 @@ end
 
 # awesome_print is a pretty printer for Ruby objects
 gem 'awesome_print', '~> 1.8'
+
+gem "jwt", "~> 2.7"
