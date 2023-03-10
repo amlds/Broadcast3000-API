@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
   namespace :api do
     namespace :v1 do
+      post "auth/login", to: "authentications#login"
+
+      resources :users
       resources :courses, only: %i[index show] do
         resources :challenges, only: %i[index show]
       end
