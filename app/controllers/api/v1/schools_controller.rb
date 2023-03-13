@@ -6,6 +6,12 @@ class Api::V1::SchoolsController < ApplicationController
     render json: @schools
   end
 
+  def display
+    @school = School.find_by(display_path: params[:display_path])
+    ## TODO: create JSON for display with Jbuilder
+    render json: @events
+  end
+
   def show
     @school = School.find(params[:id])
     render json: @school
