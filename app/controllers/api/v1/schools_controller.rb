@@ -1,5 +1,5 @@
 class Api::V1::SchoolsController < ApplicationController
-  before_action :authenticate_api_v1_user!, only: %i[index]
+  skip_before_action :authenticate_request, only: [:display]
 
   def index
     @schools = School.all
@@ -8,8 +8,8 @@ class Api::V1::SchoolsController < ApplicationController
 
   def display
     @school = School.find_by(display_path: params[:display_path])
+    @events = @school.events
     ## TODO: create JSON for display with Jbuilder
-    render json: @events
   end
 
   def show
