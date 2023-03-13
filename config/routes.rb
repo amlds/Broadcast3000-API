@@ -5,15 +5,12 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post "auth/login", to: "authentications#login"
-
       resources :users
-      resources :courses, only: %i[index show] do
-        resources :challenges, only: %i[index show]
-      end
-      resources :event_types, only: %i[index show update create destroy]
+
       resources :schools, only: %i[index show create update] do
-        resources :events, only: %i[index show update create destroy]
-        resources :batchs, only: %i[index show update create destroy]
+        get "/:display_path", to: "schools#display"
+        resources :events, only: %i[index update create destroy]
+        resources :batchs, only: %i[index update create destroy]
       end
     end
   end
