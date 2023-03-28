@@ -9,6 +9,7 @@ class Api::V1::SchoolsController < ApplicationController
   def display
     if @school = School.find_by(display_path: params[:display_path])
       @events = @school.events
+      @batches = Batch.current_batch(@school)
     end
   end
 
