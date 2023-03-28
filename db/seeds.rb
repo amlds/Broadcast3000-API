@@ -5,13 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-p "Destroy pre seed"
-Manager.destroy_all
-School.destroy_all
-City.destroy_all
-User.destroy_all
-Event.destroy_all
-EventType.destroy_all
 
 p "Create a User"
 user = User.create!(
@@ -26,7 +19,7 @@ lyon = City.create!(name: "Lyon")
 City.create!(name: "Toulouse")
 
 p "Create School"
-wagon_lyon = School.create!(city: lyon, display_path: "lyondisplayurl")
+wagon_lyon = School.create!(city: lyon, display_path: "lyondisplayurl", message_display: "Welcome to Wagon Lyon", nbr_carrousel: 3)
 
 p "Create Manager"
 Manager.create!(user: user, school: wagon_lyon)
@@ -41,6 +34,13 @@ p "Create courses"
 Course.create(name: "Web Development")
 Course.create(name: "Data Science")
 Course.create(name: "Data Analytics")
+
+p "Create Batch"
+Batch.new(number: 932, school: School.first, course: Course.first, start_at: (DateTime.now - 1.week).beginning_of_day + 8.hours, end_at: (DateTime.now + 1.week).beginning_of_day + 8.hours).save
+
+p "Create Event"
+Event.create!(name: "Welcome to Wagon", start_time: (DateTime.now + 1.week).beginning_of_day + 18.hours, end_time: (DateTime.now + 1.week).beginning_of_day + 20.hours, description: "Welcome to Wagon", event_type: EventType.first, school: School.first)
+Event.create!(name: "Welcome to Wagon 2", start_time: (DateTime.now + 2.week).beginning_of_day + 18.hours, end_time: (DateTime.now + 2.week).beginning_of_day + 20.hours, description: "Welcome to Wagon 2", event_type: EventType.last, school: School.first)
 
 p "Create Challenge web"
 Challenge.create!(name: "Setup", programming_language: "Software", course: Course.first)

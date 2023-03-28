@@ -7,9 +7,9 @@ class Api::V1::SchoolsController < ApplicationController
   end
 
   def display
-    @school = School.find_by(display_path: params[:display_path])
-    @events = @school.events
-    ## TODO: create JSON for display with Jbuilder
+    if @school = School.find_by(display_path: params[:display_path])
+      @events = @school.events
+    end
   end
 
   def show
