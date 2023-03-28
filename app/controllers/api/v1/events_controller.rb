@@ -1,16 +1,10 @@
 class Api::V1::EventsController < ApplicationController
-  before_action :set_event, only: %i[show update destroy]
+  before_action :set_event, only: %i[update destroy]
 
   def index
     @school = School.find(params[:school_id])
     @events = @school.events
     render json: @events
-  end
-
-  def show
-    @school = School.find(params[:school_id])
-    @event = @school.events.find(params[:id])
-    render json: @event
   end
 
   def update
@@ -24,10 +18,9 @@ class Api::V1::EventsController < ApplicationController
 
   def create
     @school = School.find(params[:school_id])
-    p @school
-    ap @school
     @event = @school.events.build(event_params)
     @event.event_type = EventType.find_by(id: params[:event][:event_type_id])
+
     if @event.save
       render json: @event, status: :created
     else
