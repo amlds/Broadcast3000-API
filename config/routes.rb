@@ -9,9 +9,11 @@ Rails.application.routes.draw do
 
       resources :users
       resources :schools, only: %i[index show create update] do
-        resources :events, only: %i[index update create destroy]
-        resources :batchs, only: %i[index update create destroy]
+        resources :events, only: %i[index create]
+        resources :batchs, only: %i[create]
       end
+      resources :events, only: %i[update destroy]
+      resources :batchs, only: %i[update destroy]
     end
   end
 end
