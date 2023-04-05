@@ -1,19 +1,19 @@
 class Api::V1::SchoolsController < ApplicationController
   skip_before_action :authenticate_request, only: [:display]
 
-  def index
-    @schools = School.all
-    render json: @schools
-  end
-
+  # GET /api/v1/display/:display_path
   def display
-    if @school = School.find_by(display_path: params[:display_path])
-      @events = @school.events
-      @batches = Batch.current_batch(@school)
+    @school = School.find_by(display_path: params[:display_path])
+    if @school.nil?
+      render json: { error: "School not found" }, status: :not_found
+      return
     end
+    @events = @school.events
+    @batchs = Batch.current_batch(@school)
   end
 
   def show
+    # todo
     @school = School.find(params[:id])
     render json: @school
   end
