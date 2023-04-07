@@ -3,7 +3,7 @@ class Batch < ApplicationRecord
 
   belongs_to :school
   belongs_to :course
-  has_many :batchchallenges
+  has_many :batchchallenges, dependent: :destroy
   has_many :challenges, through: :batchchallenges
 
   validates :start_at, :number, presence: true
@@ -15,25 +15,18 @@ class Batch < ApplicationRecord
 
   def challenge_of_the_day
     # return the challenge of the day
-    self.batchchallenges.where(day: Date.today).first.challenge
+    batchchallenges.where(day: Date.today).first.challenge
   end
 
   def create_batchchallenges
     # create batchchallenges for all challenges in the course
-    day = 0
-    saturday_day = 5
+    current_day = 0
 
-    self.course.challenges.each do |challenge|
-      if day.zero?
-        Batchchallenge.create!(challenge: challenge, batch: self, day: start_at.to_date)
-      elsif (day % saturday_day).zero? # if day is saturday, we skip to monday
-        day += 2
-        Batchchallenge.create!(challenge: challenge, batch: self, day: (start_at.to_date + day.day))
-        saturday_day += 7
-      else
-        Batchchallenge.create!(challenge: challenge, batch: self, day: (start_at.to_date + day.day))
-      end
-      day += 1
+    course.challenges.each do |challenge|
+      current_day += 2 if (start_at.to_date + current_day.day).strftime("%A") == "Saturday" # if start_at is sunday, we skip to monday
+
+      Batchchallenge.create!(challenge:, batch: self, day: (start_at.to_date + current_day.day))
+      current_day += 1
     end
   end
 end
