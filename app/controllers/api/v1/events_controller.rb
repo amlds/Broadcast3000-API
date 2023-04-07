@@ -1,21 +1,6 @@
 class Api::V1::EventsController < ApplicationController
   before_action :set_event, only: %i[update destroy]
 
-  def index
-    @school = School.find(params[:school_id])
-    @events = @school.events
-    render json: @events
-  end
-
-  def update
-    @event = Event.find(params[:id])
-    if @event.update(event_params)
-      render json: @event, status: :ok
-    else
-      render json: @event.errors, status: :unprocessable_entity
-    end
-  end
-
   def create
     @school = School.find(params[:school_id])
     @event = Event.new(event_params)
@@ -29,10 +14,23 @@ class Api::V1::EventsController < ApplicationController
     end
   end
 
+  def update
+    if @event.users.include?(@current_user)
+      if @event.update(event_params)
+        render :show, as: :event, status: :ok
+      else
+        render json: @event.errors, status: :unprocessable_entity
+      end
+    end
+  end
+
   def destroy
-    @event = Event.find(params[:id])
-    @event.destroy
-    head :no_content
+    if @event.users.include?(@current_user)
+      @event.destroy
+      render json: @event, status: :ok
+    else
+      render json: @event.school.managers, status: :forbidden
+    end
   end
 
   private

@@ -13,12 +13,9 @@ Rails.application.routes.draw do
       # Display
       get "display/:display_path", to: "schools#display"
 
-      # Users
-      resources :users
-
       # Schools
-      resources :schools, only: %i[index show create update] do
-        resources :events, only: %i[index create]
+      resources :schools, only: %i[update] do
+        resources :events, only: %i[create]
         resources :batchs, only: %i[create]
       end
       resources :events, only: %i[update destroy]

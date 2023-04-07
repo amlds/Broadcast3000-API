@@ -5,6 +5,9 @@ class Event < ApplicationRecord
 
   belongs_to :event_type
   belongs_to :school
+  has_many :managers, through: :school
+  has_many :users, through: :managers
+
   validate :start_time_cant_be_end_time
 
   private
