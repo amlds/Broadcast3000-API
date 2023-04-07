@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
-  after_create_commit { broadcast_event }
+  # after_create_commit { broadcast_event }
+
+  has_one_attached :photo
 
   belongs_to :event_type
   belongs_to :school
