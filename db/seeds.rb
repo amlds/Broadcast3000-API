@@ -137,28 +137,27 @@ Challenge.create!(name: "Models & CRUD", programming_language: "Ruby on Rails", 
 Challenge.create!(name: "Demo Day", programming_language: "Ruby on Rails", course: Course.last)
 
 # associate a challenge to a day of the week from a start date
-def add_day_to_challenge(course, start_date)
+def add_day_to_challenge(course, start_date, batch)
   day = 0
   saturday = 5
 
   Challenge.where(course: course).each do |challenge|
     if day.zero?
-      challenge.update!(day: start_date)
+      Batchchallenge.create!(challenge: challenge, batch: batch, day: start_date)
       day += 1
     elsif (day % saturday).zero? # if day is saturday, we skip to monday
       day += 2
-      challenge.update!(day: start_date + day.day)
+      Batchchallenge.create!(challenge: challenge, batch: batch, day: start_date + day.day)
       saturday += 7
       day += 1
     else
-      challenge.update!(day: start_date + day.day)
+      Batchchallenge.create!(challenge: challenge, batch: batch, day: start_date + day.day)
       day += 1
     end
   end
 end
 
 p "Associate a challenge to a day of the week from a start date"
-add_day_to_challenge(Course.first, Date.new(2023, 4, 17))
-add_day_to_challenge(Course.last, Date.new(2023, 4, 17))
+add_day_to_challenge(Course.first, Date.new(2023, 4, 17), Batch.first)
 
 p "Finish seed !"

@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  batch: one
+  challenge: one
+  day: 2023-04-07
+
+two:
+  batch: two
+  challenge: two
+  day: 2023-04-07

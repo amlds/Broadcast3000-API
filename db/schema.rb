@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_07_080424) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_07_095032) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_080424) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "batchchallenges", force: :cascade do |t|
+    t.bigint "batch_id", null: false
+    t.bigint "challenge_id", null: false
+    t.date "day"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["batch_id"], name: "index_batchchallenges_on_batch_id"
+    t.index ["challenge_id"], name: "index_batchchallenges_on_challenge_id"
+  end
+
   create_table "batches", force: :cascade do |t|
     t.integer "number"
     t.bigint "school_id", null: false
@@ -60,7 +70,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_080424) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "programming_language"
-    t.date "day"
     t.index ["course_id"], name: "index_challenges_on_course_id"
   end
 
@@ -126,6 +135,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_080424) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "batchchallenges", "batches"
+  add_foreign_key "batchchallenges", "challenges"
   add_foreign_key "batches", "courses"
   add_foreign_key "batches", "schools"
   add_foreign_key "challenges", "courses"
