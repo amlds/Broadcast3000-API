@@ -6,3 +6,4 @@ json.course do
   json.id batch.course.id
   json.name batch.course.name
 end
+json.challenge batch.challenge_of_the_day
