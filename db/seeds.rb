@@ -35,9 +35,6 @@ Course.create(name: "Web Development")
 Course.create(name: "Data Science")
 Course.create(name: "Data Analytics")
 
-p "Create Batch"
-Batch.new(number: 932, school: School.first, course: Course.first, start_at: (DateTime.now - 1.week).beginning_of_day + 8.hours, end_at: (DateTime.now + 1.week).beginning_of_day + 8.hours).save
-
 p "Create Event"
 Event.create!(name: "Welcome to Wagon", start_time: (DateTime.now + 1.week).beginning_of_day + 18.hours, end_time: (DateTime.now + 1.week).beginning_of_day + 20.hours, description: "Welcome to Wagon", event_type: EventType.first, school: School.first)
 Event.create!(name: "Welcome to Wagon 2", start_time: (DateTime.now + 2.week).beginning_of_day + 18.hours, end_time: (DateTime.now + 2.week).beginning_of_day + 20.hours, description: "Welcome to Wagon 2", event_type: EventType.last, school: School.first)
@@ -136,28 +133,7 @@ Challenge.create!(name: "Dress Rehearsal", programming_language: "Ruby on Rails"
 Challenge.create!(name: "Models & CRUD", programming_language: "Ruby on Rails", course: Course.last)
 Challenge.create!(name: "Demo Day", programming_language: "Ruby on Rails", course: Course.last)
 
-# associate a challenge to a day of the week from a start date
-def add_day_to_challenge(course, start_date, batch)
-  day = 0
-  saturday = 5
-
-  Challenge.where(course: course).each do |challenge|
-    if day.zero?
-      Batchchallenge.create!(challenge: challenge, batch: batch, day: start_date)
-      day += 1
-    elsif (day % saturday).zero? # if day is saturday, we skip to monday
-      day += 2
-      Batchchallenge.create!(challenge: challenge, batch: batch, day: start_date + day.day)
-      saturday += 7
-      day += 1
-    else
-      Batchchallenge.create!(challenge: challenge, batch: batch, day: start_date + day.day)
-      day += 1
-    end
-  end
-end
-
-p "Associate a challenge to a day of the week from a start date"
-add_day_to_challenge(Course.first, Date.new(2023, 4, 17), Batch.first)
+p "Create Batch"
+Batch.new(number: 932, school: School.first, course: Course.first, start_at: (Date.new(2023, 4, 17)), end_at: ((Date.new(2023, 4, 17) + 8.weeks).next_occurring(:friday))).save
 
 p "Finish seed !"
