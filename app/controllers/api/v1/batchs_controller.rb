@@ -5,6 +5,7 @@ class Api::V1::BatchsController < ApplicationController
   def create
     @school = School.find(params[:school_id])
     @batch = Batch.new(batch_params)
+    @batch.end_at = (@batch.start_at + 8.weeks).next_occurring(:friday)
 
     if @batch.save
       render json: @batch, status: :created
@@ -36,6 +37,6 @@ class Api::V1::BatchsController < ApplicationController
   end
 
   def batch_params
-    params.require(:batch).permit(:number, :start_at, :end_at, :school_id, :course_id)
+    params.require(:batch).permit(:number, :start_at, :course_id)
   end
 end
