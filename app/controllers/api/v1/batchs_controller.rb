@@ -5,7 +5,8 @@ class Api::V1::BatchsController < ApplicationController
   def create
     @school = School.find(params[:school_id])
     @batch = Batch.new(batch_params)
-    @batch.end_at = (@batch.start_at + 8.weeks).next_occurring(:friday)
+    @batch.school = @school
+    @batch.end_at = (@batch.start_at.to_date + 8.weeks).next_occurring(:friday)
 
     if @batch.save
       render json: @batch, status: :created
