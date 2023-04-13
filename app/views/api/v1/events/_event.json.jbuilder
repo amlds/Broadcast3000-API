@@ -6,6 +6,7 @@ json.description event.description
 json.photo_url "https://res.cloudinary.com/alexbar/image/upload/v1680708153/development/#{event.photo.key}" if event.photo.attached?
 
 json.event_type do
+  json.id event.event_type.id
   json.name event.event_type.name
   json.color event.event_type.color
 end
