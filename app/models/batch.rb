@@ -15,7 +15,12 @@ class Batch < ApplicationRecord
 
   def challenge_of_the_day
     # return the challenge of the day
-    batchchallenges.where(day: Date.today).first.challenge
+    batch_challenge = batchchallenges.find_by(day: Date.today)
+    if batch_challenge
+      batch_challenge.challenge
+    else
+      nil
+    end
   end
 
   def create_batchchallenges

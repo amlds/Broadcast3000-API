@@ -35,10 +35,6 @@ Course.create(name: "Web Development")
 Course.create(name: "Data Science")
 Course.create(name: "Data Analytics")
 
-p "Create Event"
-Event.create!(name: "Welcome to Wagon", start_time: (DateTime.now + 1.week).beginning_of_day + 18.hours, end_time: (DateTime.now + 1.week).beginning_of_day + 20.hours, description: "Welcome to Wagon", event_type: EventType.first, school: School.first)
-Event.create!(name: "Welcome to Wagon 2", start_time: (DateTime.now + 2.week).beginning_of_day + 18.hours, end_time: (DateTime.now + 2.week).beginning_of_day + 20.hours, description: "Welcome to Wagon 2", event_type: EventType.last, school: School.first)
-
 p "Create Challenge web"
 Challenge.create!(name: "Setup", programming_language: "Software", course: Course.first)
 Challenge.create!(name: "Programming Basics", programming_language: "ruby", course: Course.first)
